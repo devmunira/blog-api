@@ -2,16 +2,14 @@ const fs = require('fs/promises')
 const path = require('path')
 
 class dbConnection {
-  dbStore : {}[] | null
-  dbURL : string
   // send specific db file path with path resolver
-  constructor(filepath: string) {
+  constructor(filepath) {
     this.dbStore = null;
     this.dbURL = filepath;
   }
 
   // read file from specific db file
-  async readFile(): Promise<void> {
+  async readFile() {
     try {
       let data = await fs.readFile(this.dbURL, 'utf-8');
       this.dbStore = JSON.parse(data);
@@ -21,7 +19,7 @@ class dbConnection {
   }
 
   // write file on specific db file
-  async writeFile(): Promise<void> {
+  async writeFile() {
     try {
       if (this.dbStore) {
         await fs.writeFile(this.dbURL, JSON.stringify(this.dbStore), 'utf-8');
@@ -32,7 +30,7 @@ class dbConnection {
   }
 
   // retrieve data from specific db file
-  async getDB(): Promise<any> {
+  async getDB(){
     if (this.dbStore) {
       return this.dbStore;
     }
@@ -42,4 +40,4 @@ class dbConnection {
 }
 
 // export dbConnection object so that it can be used for multiple db files
-module.exports =  dbConnection;
+export default  dbConnection;
