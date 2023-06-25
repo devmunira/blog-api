@@ -1,1 +1,62 @@
-[{"id":2,"name":"cat2"},{"id":1,"name":"test"},{"id":1,"name":"test"}]
+[
+    {
+        "id": 1,
+        "title": "First Articles",
+        "body": "First Articles body text",
+        "cover": "https://stackoverflow.com",
+        "status": "published",
+        "authorId": 1,
+        "categoryId": 1,
+        "link": "/articles/1",
+        "createdAt" : "2023-06-25T11:31:38.690Z",
+        "updatedAt" : "2023-06-25T11:31:38.690Z"
+    },
+    {
+        "id": 2,
+        "title": "Second Articles",
+        "body": "Second Articles body text",
+        "cover": "https://stackoverflow.com",
+        "status": "published",
+        "authorId": 2,
+        "categoryId": 2,
+        "link": "/articles/2",
+        "createdAt" : "2023-06-25T11:32:09.563Z",
+        "updatedAt" : "2023-06-25T11:32:09.563Z"
+    },
+    {
+        "id": 3,
+        "title": "Third Articles",
+        "body": "Third Articles body text",
+        "cover": "https://stackoverflow.com",
+        "status": "published",
+        "authorId": 3,
+        "categoryId": 3,
+        "link": "/articles/3",
+        "createdAt" : "2023-06-25T11:32:25.295Z",
+        "updatedAt" : "2023-06-25T11:32:25.295Z"
+    },
+    {
+        "id": 4,
+        "title": "Forth Articles",
+        "body": "Forth Articles body text",
+        "cover": "https://stackoverflow.com",
+        "status": "published",
+        "authorId": 4,
+        "categoryId": 4,
+        "link": "/articles/4",
+        "createdAt" : "2023-06-25T11:32:44.196Z",
+        "updatedAt" : "2023-06-25T11:32:44.196Z"
+    },
+    {
+        "id": 5,
+        "title": "Fifth Articles",
+        "body": "Fifth Articles body text",
+        "cover": "https://stackoverflow.com",
+        "status": "published",
+        "authorId": 5,
+        "categoryId": 5,
+        "link": "/articles/5",
+        "createdAt" : "2023-06-25T11:32:56.398Z",
+        "updatedAt" : "2023-06-25T11:32:56.398Z"
+    }
+]

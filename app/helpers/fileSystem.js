@@ -1,5 +1,5 @@
-const fs = require('fs/promises')
-const path = require('path')
+import fs from 'fs/promises'
+import path from 'path'
 
 class dbConnection {
   // send specific db file path with path resolver
@@ -40,4 +40,4 @@ class dbConnection {
 }
 
 // export dbConnection object so that it can be used for multiple db files
-export default  dbConnection;
+export default dbConnection;

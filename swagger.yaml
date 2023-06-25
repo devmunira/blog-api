@@ -1295,12 +1295,12 @@ components:
     sort_type:
       in: query
       name: sort_type
-      description: Data Sorting Type (ase,desc)
+      description: Data Sorting Type (asc,desc)
       schema:
         type: string
         format: string
         enum:
-          - ase
+          - asc
           - desc
         example: desc
     search:
