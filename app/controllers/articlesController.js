@@ -1,4 +1,5 @@
 import dbConnection from "../helpers/fileSystem.js";
+import Article from "../models/Article.js";
 import {findAllRequestValidation} from "../request/CategoryRequest.js"
 import path from "path"
 
@@ -18,65 +19,22 @@ export const getAllArticles = async (req, res, next) => {
 
 
         // 3. Retrieve all Categories from the database
-        const db = new dbConnection(path.resolve('./app/db/articles.json'))
-        let articles = await db.getDB();
-
+        let articles = await Article.init()
 
         // 4. Generate data based on search & pagination
         // 4.1 : Search
-        if(search){
-            articles = articles.filter((item) => item.title.toLowerCase().includes(search))
-        }
+        articles = Article.search(search)
+
         // 4.2 : sorting
-        articles = articles.sort((a,b) => {
-            if(sortType == 'asc'){
-                return a[sortBy].toString().localeCompare(b[sortBy].toString())
-            }else if(sortType == 'desc'){
-                return b[sortBy].toString().localeCompare(a[sortBy].toString())
-            }
-        })  
+        articles = Article.sort(sortType,sortBy)
+
         // 4.3 : pagination
-        let start = page > 1 ? (page - 1) * limit : 0;
-        let totalItems = articles.length;
-        articles = articles.slice(start,  page * limit)
+        let {totalItems, articles : articlesItem } = Article.pagination(page,limit) 
+        articles = articlesItem
 
         // 5. Send responses according to status code
-        articles = articles.map((item) => {
-            let obj = {...item}
-            obj.author = {
-                id : item.authorId,
-                //TODO: Fetch author name
-                name : 'test'
-            }
-            obj.category = {
-                id : item.categoryId,
-                //TODO: Fetch category name
-                name : 'test'
-            }
-            delete obj.authorId
-            delete obj.categoryId
-            return obj;
-        })
-        let result = {
-            code : 200,
-            message : "Successfully fetch all articles from db",
-            data : articles,
-            links: {
-                self: req.url,
-                nextPage: `/articles?page=${page + 1}&limit=${limit}`,
-                prevPage: `/articles?page=${page - 1}&limit=${limit}`,
-                firstPage: `/articles?page=${1}&limit=${limit}`,
-                lastPage: `/articles?page=${Math.ceil(articles.length / limit)}&limit=${limit}`,
-            },
-            pagination: {
-            page,
-            limit,
-            next: page + 1,
-            prev: page - 1,
-            totalPage: Math.ceil(totalItems / limit),
-            totalItems
-            }
-        }
+        let result =  Article.transformedArticles(page,limit,totalItems,req.url)
+
         if(page <= 1) {
             delete result.pagination.prev
             delete result.links.prevPage
